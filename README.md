@@ -12,7 +12,7 @@ With the Outdoor Grocery Store app, you can easily create, edit, and manage your
   
 - Photo Memories: Attach photos to your entries to relive your adventures and share your experiences with fellow hunters.
   
-- Geolocation (Optional): For the tech-savvy outdoorsman, pinpoint the exSact locations of your hunting grounds on a map.
+- Geolocation (Optional): For the tech-savvy outdoorsman, pinpoint the exact locations of your hunting grounds on a map.
   
 - User Authentication (Optional): Keep your hunting logs private or share them with friends – it's your choice!
 
