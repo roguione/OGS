@@ -1,4 +1,3 @@
-// server/models/Hunting.js
 const mongoose = require('mongoose');
 
 const huntingSchema = new mongoose.Schema({
@@ -7,7 +6,12 @@ const huntingSchema = new mongoose.Schema({
   date: Date,
   latitude: Number,
   longitude: Number,
-  photos: [String],
+  photos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Photo',
+    },
+  ],
 });
 
 module.exports = mongoose.model('Hunting', huntingSchema);
