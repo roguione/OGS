@@ -2,7 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const ejs = require('ejs'); // Require EJS
+const ejs = require('ejs');
 const app = express();
 
 // Load environment variables from a .env file if needed
@@ -15,14 +15,31 @@ app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views'); // Set the views directory
 
+// Set up static file serving
+app.use('/public', express.static(__dirname + '/public'));
+
 // Connect to the database
 mongoose.connect('mongodb://localhost/outdoor_grocery_store', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-// Set up routes (you'll implement these in server/routes)
-const huntingRoutes = require('./server/routes/hunting');
+// CSP configuration that never works but did today
+app.use((req, res, next) => {
+  res.setHeader(
+    'Content-Security-Policy',
+    "default-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' data:; font-src 'self' data:;"
+  );
+  next();
+});
+
+// Define a route for the root URL
+app.get('/', (req, res) => {
+  res.send('Welcome to the Outdoor Grocery Store');
+});
+
+// Set up routes (implement these in server/routes)
+const huntingRoutes = require('./routes/hunting');
 app.use('/api/hunting', huntingRoutes);
 
 // Start the server
