@@ -1,0 +1,32 @@
+<!-- views/hunting/edit.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Hunting Entry</title>
+</head>
+<body>
+  <h1>Edit Hunting Entry</h1>
+  <form action="/api/hunting/<%= entry._id %>?_method=PUT" method="POST">
+    <label for="locationName">Location Name:</label>
+    <input type="text" id="locationName" name="locationName" value="<%= entry.locationName %>" required>
+    <br>
+    <label for="loadOut">Load Out:</label>
+    <input type="text" id="loadOut" name="loadOut" value="<%= entry.loadOut %>" required>
+    <br>
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" value="<%= entry.date.toISOString().substr(0, 10) %>" required>
+    <br>
+    <label for="latitude">Latitude:</label>
+    <input type="number" id="latitude" name="latitude" value="<%= entry.latitude %>" step="0.000001">
+    <br>
+    <label for="longitude">Longitude:</label>
+    <input type="number" id="longitude" name="longitude" value="<%= entry.longitude %>" step="0.000001">
+    <br>
+    <!-- Add a way to edit existing photos if desired -->
+    <label for="photos">Photos:</label>
+    <input type="file" id="photos" name="photos" multiple>
+    <br>
+    <button type="submit">Save Changes</button>
+  </form>
+</body>
+</html>

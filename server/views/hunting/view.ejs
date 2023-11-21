@@ -1,0 +1,29 @@
+<!-- views/hunting/view.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>View Hunting Entry</title>
+</head>
+<body>
+  <h1>Hunting Entry</h1>
+  <h2>Location: <%= entry.locationName %></h2>
+  <p><strong>Load Out:</strong> <%= entry.loadOut %></p>
+  <p><strong>Date:</strong> <%= entry.date.toDateString() %></p>
+  <p><strong>Latitude:</strong> <%= entry.latitude %></p>
+  <p><strong>Longitude:</strong> <%= entry.longitude %></p>
+  <h3>Photos:</h3>
+  <% if (entry.photos && entry.photos.length > 0) { %>
+    <ul>
+      <% entry.photos.forEach(function(photo) { %>
+        <li><img src="<%= photo %>" alt="Hunting Photo"></li>
+      <% }); %>
+    </ul>
+  <% } else { %>
+    <p>No photos available for this entry.</p>
+  <% } %>
+  <a href="/api/hunting/<%= entry._id %>/edit">Edit</a>
+  <form action="/api/hunting/<%= entry._id %>?_method=DELETE" method="POST">
+    <button type="submit">Delete</button>
+  </form>
+</body>
+</html>
