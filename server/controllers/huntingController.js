@@ -37,12 +37,12 @@ async function getHuntingEntry(req, res) {
 async function createHuntingEntry(req, res) {
   try {
     const newHuntingEntry = new Hunting(req.body);
-    const savedHuntingEntry = await newHuntingEntry.save();
+    await newHuntingEntry.save();
 
     res.redirect('/status'); // create a  /status updateSuccess.ejs deleteSuccess.ejs for feedback in /views
   } catch (error) {
     console.error('Error creating hunting entry:', error);
-    res.status(500).render({ error: 'Internal Server Error' }); // create eror.ejs in /views
+    res.status(500).render({ error: 'Internal Server Error' }); // create error.ejs in /views
   }
 }
 
