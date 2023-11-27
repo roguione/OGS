@@ -8,12 +8,12 @@ async function getAllHuntingEntries(req, res) {
     // Retrieve all hunting entries from the database using the Hunting model
     const huntingEntries = await Hunting.find();
 
-    // Send the retrieved data as a response
-    res.json(huntingEntries);
+    // Render Hunting Entry from views.ejs temp adn pass data to it
+    res.render('huntingEntries', {huntingEntries }); // create a huntingEntries.ejs in /views
   } catch (error) {
     // Handle any errors and send an error response if necessary
     console.error('Error fetching hunting entries:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).render({ error: 'Internal Server Error' }); // create error.ejs in /views
   }
 }
 
@@ -23,13 +23,13 @@ async function getHuntingEntry(req, res) {
     const huntingEntry = await Hunting.findById(req.params.id);
 
     if (!huntingEntry) {
-      return res.status(404).json({ error: 'Hunting entry not found' });
+      return res.status(404).render({ error: 'Hunting entry not found' });
     }
 
-    res.json(huntingEntry);
+    res.render('view',  { entry: huntingEntry });
   } catch (error) {
     console.error('Error fetching hunting entry by ID:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).render({ error: 'Internal Server Error' });
   }
 }
 
@@ -39,10 +39,10 @@ async function createHuntingEntry(req, res) {
     const newHuntingEntry = new Hunting(req.body);
     const savedHuntingEntry = await newHuntingEntry.save();
 
-    res.status(201).json(savedHuntingEntry);
+    res.redirect('/status'); // create a  /status updateSuccess.ejs deleteSuccess.ejs for feedback in /views
   } catch (error) {
     console.error('Error creating hunting entry:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).render({ error: 'Internal Server Error' }); // create eror.ejs in /views
   }
 }
 
@@ -56,13 +56,13 @@ async function updateHuntingEntry(req, res) {
     );
 
     if (!updatedHuntingEntry) {
-      return res.status(404).json({ error: 'Hunting entry not found' });
+      return res.status(404).render({ error: 'Hunting entry not found' });
     }
 
-    res.json(updatedHuntingEntry);
+    res.render('updateSuccess');
   } catch (error) {
     console.error('Error updating hunting entry:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).render({ error: 'Internal Server Error' });
   }
 }
 
@@ -72,13 +72,13 @@ async function deleteHuntingEntry(req, res) {
     const deletedHuntingEntry = await Hunting.findByIdAndDelete(req.params.id);
 
     if (!deletedHuntingEntry) {
-      return res.status(404).json({ error: 'Hunting entry not found' });
+      return res.status(404).render({ error: 'Hunting entry not found' });
     }
 
-    res.json({ message: 'Hunting entry deleted successfully' });
+    res.render('deleteSuccess');
   } catch (error) {
     console.error('Error deleting hunting entry:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).render({ error: 'Internal Server Error' });
   }
 }
 
