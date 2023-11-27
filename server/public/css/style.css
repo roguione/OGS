@@ -1,0 +1,44 @@
+/* public/css/style.css */
+
+/* styles */
+body, h1, h2, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* styles for the header */
+header {
+    background-color: #355118;
+    color: #131212;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Style the main section */
+main {
+    padding: 2rem;
+}
+
+/* Style the CTA section */
+.cta {
+    background-color: rgb(100, 80, 12);
+    border-radius: 5px;
+    padding: 3rem;
+    text-align: align-left;
+}
+
+/* Style buttons */
+.btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 0.3rem 1rem;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+    margin-top: 7px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}

@@ -41,7 +41,7 @@ app.use((req, res, next) => {
 
 // Define a route for the root URL
 app.get('/', (req, res) => {
-  res.send('Outdoor Grocery Store');
+  res.render('index');
 });
 
 // Set up routes (implement these in server/routes)
