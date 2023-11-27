@@ -1,0 +1,22 @@
+<!-- views/huntingEntries.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hunting Entries</title>
+  <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body>
+  <h1>Hunting Entries</h1>
+  <!-- Display the list of hunting entries here -->
+  <ul>
+    <% huntingEntries.forEach(function(entry) { %>
+      <li>
+        <a href="/api/hunting/<%= entry._id %>">
+          <%= entry.locationName %> - <%= entry.date.toDateString() %>
+        </a>
+      </li>
+    <% }); %>
+  </ul>
+  <a href="/api/hunting/create" class="btn">Create Entry</a>
+</body>
+</html>

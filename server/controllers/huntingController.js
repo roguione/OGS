@@ -4,38 +4,38 @@
 const Hunting = require('../models/Hunting');
 const Photo = require('../models/photo.js');
 
-// function to get all hunting entries
+// Function to get all hunting entries
 async function getAllHuntingEntries(req, res) {
   try {
     // Retrieve all hunting entries from the database using the Hunting model
     const huntingEntries = await Hunting.find();
 
-    // Render Hunting Entry from views.ejs temp adn pass data to it
-    res.render('huntingEntries', {huntingEntries }); // create a huntingEntries.ejs in /views
+    // Render the 'huntingEntries.ejs' template and pass data to it
+    res.render('huntingEntries', { huntingEntries });
   } catch (error) {
     // Handle any errors and send an error response if necessary
     console.error('Error fetching hunting entries:', error);
-    res.status(500).render({ error: 'Internal Server Error' }); // create error.ejs in /views
+    res.status(500).render('error', { error: 'Internal Server Error' });
   }
 }
 
-// function to get a single hunting entry by ID
+// Function to get a single hunting entry by ID
 async function getHuntingEntry(req, res) {
   try {
     const huntingEntry = await Hunting.findById(req.params.id);
 
     if (!huntingEntry) {
-      return res.status(404).render({ error: 'Hunting entry not found' });
+      return res.status(404).render('error', { error: 'Hunting entry not found' });
     }
 
-    res.render('hunting/view',  { entry: huntingEntry });
+    res.render('hunting/view', { entry: huntingEntry });
   } catch (error) {
     console.error('Error fetching hunting entry by ID:', error);
-    res.status(500).render({ error: 'Internal Server Error' });
+    res.status(500).render('error', { error: 'Internal Server Error' });
   }
 }
 
-// function to create a new hunting entry
+// Function to create a new hunting entry
 async function createHuntingEntry(req, res) {
   try {
     await Hunting.create(req.body);
@@ -46,7 +46,7 @@ async function createHuntingEntry(req, res) {
   }
 }
 
-// function to update an existing hunting entry
+// Function to update an existing hunting entry
 async function updateHuntingEntry(req, res) {
   try {
     await Hunting.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -57,7 +57,23 @@ async function updateHuntingEntry(req, res) {
   }
 }
 
-// function to delete a hunting entry by ID
+// Function to edit an existing hunting entry
+async function editHuntingEntry(req, res) {
+  try {
+    const huntingEntry = await Hunting.findById(req.params.id);
+
+    if (!huntingEntry) {
+      return res.status(404).render('status/error', { error: 'Hunting entry not found' });
+    }
+
+    res.render('hunting/edit', { entry: huntingEntry });
+  } catch (error) {
+    console.error('Error fetching hunting entry for editing:', error);
+    res.status(500).render('status/error', { error: 'Internal Server Error' });
+  }
+}
+
+// Function to delete a hunting entry by ID
 async function deleteHuntingEntry(req, res) {
   try {
     await Hunting.findByIdAndDelete(req.params.id);
@@ -73,5 +89,6 @@ module.exports = {
   getHuntingEntry,
   createHuntingEntry,
   updateHuntingEntry,
+  editHuntingEntry,
   deleteHuntingEntry,
 };

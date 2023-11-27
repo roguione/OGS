@@ -1,4 +1,4 @@
-// server.js
+// server/server.js
 // Require and configure dotenv
 require('dotenv').config();
 

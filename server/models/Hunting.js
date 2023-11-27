@@ -1,4 +1,4 @@
-// models/Hunting.js
+/* models/Hunting.js */
 const mongoose = require('mongoose');
 
 const huntingSchema = new mongoose.Schema({
