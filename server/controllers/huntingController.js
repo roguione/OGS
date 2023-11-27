@@ -1,3 +1,5 @@
+// controllers/huntingControllers.js
+
 // Import the Hunting and Photo models
 const Hunting = require('../models/Hunting');
 const Photo = require('../models/photo.js');
@@ -26,7 +28,7 @@ async function getHuntingEntry(req, res) {
       return res.status(404).render({ error: 'Hunting entry not found' });
     }
 
-    res.render('view',  { entry: huntingEntry });
+    res.render('hunting/view',  { entry: huntingEntry });
   } catch (error) {
     console.error('Error fetching hunting entry by ID:', error);
     res.status(500).render({ error: 'Internal Server Error' });
@@ -36,49 +38,33 @@ async function getHuntingEntry(req, res) {
 // function to create a new hunting entry
 async function createHuntingEntry(req, res) {
   try {
-    const newHuntingEntry = new Hunting(req.body);
-    await newHuntingEntry.save();
-
-    res.redirect('/status'); // create a  /status updateSuccess.ejs deleteSuccess.ejs for feedback in /views
+    await Hunting.create(req.body);
+    res.redirect('/status');
   } catch (error) {
     console.error('Error creating hunting entry:', error);
-    res.status(500).render({ error: 'Internal Server Error' }); // create error.ejs in /views
+    res.status(500).render('status/error', { error: 'Internal Server Error' });
   }
 }
 
 // function to update an existing hunting entry
 async function updateHuntingEntry(req, res) {
   try {
-    const updatedHuntingEntry = await Hunting.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
-
-    if (!updatedHuntingEntry) {
-      return res.status(404).render({ error: 'Hunting entry not found' });
-    }
-
-    res.render('updateSuccess');
+    await Hunting.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.render('status/updateSuccess');
   } catch (error) {
     console.error('Error updating hunting entry:', error);
-    res.status(500).render({ error: 'Internal Server Error' });
+    res.status(500).render('status/error', { error: 'Internal Server Error' });
   }
 }
 
 // function to delete a hunting entry by ID
 async function deleteHuntingEntry(req, res) {
   try {
-    const deletedHuntingEntry = await Hunting.findByIdAndDelete(req.params.id);
-
-    if (!deletedHuntingEntry) {
-      return res.status(404).render({ error: 'Hunting entry not found' });
-    }
-
-    res.render('deleteSuccess');
+    await Hunting.findByIdAndDelete(req.params.id);
+    res.render('status/deleteSuccess');
   } catch (error) {
     console.error('Error deleting hunting entry:', error);
-    res.status(500).render({ error: 'Internal Server Error' });
+    res.status(500).render('status/error', { error: 'Internal Server Error' });
   }
 }
 
