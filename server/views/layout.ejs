@@ -1,0 +1,24 @@
+<!-- views/layout.ejs-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outdoor Grocery Store</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/api/hunting">View Entries</a></li>
+                <li><a href="/api/hunting/create">Create Entry</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <%- body %> <!-- This will include the content of other EJS templates -->
+    </main>
+</body>
+</html>

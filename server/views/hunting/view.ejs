@@ -3,6 +3,7 @@
 <html>
 <head>
   <title>View Hunting Entry</title>
+  <link rel="stylesheet" href="/public/css/style.css">
 </head>
 <body>
   <h1>Hunting Entry</h1>
@@ -12,6 +13,7 @@
   <p><strong>Latitude:</strong> <%= entry.latitude %></p>
   <p><strong>Longitude:</strong> <%= entry.longitude %></p>
   <h3>Photos:</h3>
+  <!-- Display photos here (modify maybe?) -->
   <% if (entry.photos && entry.photos.length > 0) { %>
     <ul>
       <% entry.photos.forEach(function(photo) { %>
@@ -21,9 +23,13 @@
   <% } else { %>
     <p>No photos available for this entry.</p>
   <% } %>
-  <a href="/api/hunting/<%= entry._id %>/edit">Edit</a>
-  <form action="/api/hunting/<%= entry._id %>?_method=DELETE" method="POST">
-    <button type="submit">Delete</button>
-  </form>
+  <!-- Buttons for Edit and Delete -->
+  <div class="actions">
+    <a href="/api/hunting/<%= entry._id %>/edit" class="btn">Edit</a>
+    <form action="/api/hunting/<%= entry._id %>?_method=DELETE" method="POST">
+      <button type="submit" class="btn delete-btn">Delete</button>
+    </form>
+  </div>
+  <a href="/api/hunting">Back to Entries</a>
 </body>
 </html>
