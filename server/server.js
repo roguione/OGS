@@ -19,12 +19,12 @@ app.set('views', __dirname + '/views'); // Set the views directory
 // Set up static file serving
 app.use('/public', express.static(__dirname + '/public'));
 
-// Access the MongoDB URI from the environment variable
-const mongoUri = process.env.DATABASE_URL;
+// Access the MongoDB URL from the environment variable
+const mongoUrl = process.env.DATABASE_URL;
 
 // Connect to the database
 mongoose.connect(
-  'mongodb+srv://roguione:87Ddgrdr@cluster0.qm98zqc.mongodb.net/OGS?retryWrites=true&w=majority',
+  mongoUrl,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
