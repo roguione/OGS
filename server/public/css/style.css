@@ -8,37 +8,53 @@ body, h1, h2, p {
 
 /* styles for the header */
 header {
-    background-color: #355118;
-    color: #131212;
-    text-align: center;
-    padding: 1rem;
+    background-color: #355118; /* Background color for the header */
+    color: #131212; /* Text color for the header */
+    text-align: center; /* Center-align header content */
+    padding: 1rem; /* Add padding to the header */
+}
+
+/* Change the color of navigation bar links to dark tan */
+header a {
+    color: rgb(155, 123, 16);
 }
 
 /* Style the main section */
 main {
-    padding: 2rem;
+    padding: 2rem; /* Add padding to the main section */
 }
 
 /* Style the CTA section */
 .cta {
-    background-color: rgb(100, 80, 12);
-    border-radius: 5px;
-    padding: 3rem;
-    text-align: align-left;
+    background-color: rgb(155, 123, 16);
+    border-radius: 5px; /* Add border radius to the CTA section */
+    padding: 3rem; /* Add padding to the CTA section */
+    text-align: align-left; /* Align text to the left in the CTA section */
 }
 
 /* Style buttons */
 .btn {
-    display: inline-block;
-    background-color: #007bff;
-    color: #fff;
-    padding: 0.3rem 1rem;
+    display: inline-block; /* Display buttons as inline-block elements */
+    background-color: rgb(38, 98, 8); /* Background color for buttons */
+    color: #fff; /* Text color for buttons */
+    padding: 0.3rem 1rem; /* Button padding */
     text-decoration: none;
-    border-radius: 10px;
-    transition: background-color 0.3s;
-    margin-top: 7px;
+    border-radius: 10px; /* Button border radius */
+    transition: background-color 0.3s; /* Button hover transition */
+    margin-top: 7px; /* Space between buttons */
 }
 
 .btn:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Background color on button hover */
+}
+
+/* Navigation bar styles */
+header ul {
+    list-style: none; /* Remove list-style bullets */
+    padding: 0; /* Remove default padding */
+}
+
+header li {
+    display: inline; /* Display list items horizontally */
+    margin-right: 10px; /* Add some space between list items */
 }

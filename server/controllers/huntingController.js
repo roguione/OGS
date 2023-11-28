@@ -42,7 +42,10 @@ async function createHuntingEntry(req, res) {
     res.redirect('/status');
   } catch (error) {
     console.error('Error creating hunting entry:', error);
-    res.status(500).render('status/error', { error: 'Internal Server Error' });
+    res.status(500).render('status/error', {
+      errorCode: 500, // Add error code here
+      errorMessage: 'Internal Server Error', // Add error message here
+    });
   }
 }
 
