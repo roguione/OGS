@@ -1,6 +1,8 @@
 // server/server.js
+
 // Require and configure dotenv
 require('dotenv').config();
+const methodOverride = require('method-override');
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -14,10 +16,11 @@ app.use(bodyParser.json());
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views'); // Set the views directory
+app.set('views', __dirname + '/views'); 
 
 // Set up static file serving
 app.use('/public', express.static(__dirname + '/public'));
+app.use(methodOverride('_method'))
 
 // Access the MongoDB URL from the environment variable
 const mongoUrl = process.env.DATABASE_URL;
