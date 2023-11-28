@@ -49,7 +49,7 @@ async function createHuntingEntry(req, res) {
 
     // Render the 'status/error.ejs' template with error details
     res.status(500).render('status/error', {
-      errorCode: 500, // Add error code here
+      errorCode: 500, 
       errorMessage: 'Internal Server Error', 
     });
   }

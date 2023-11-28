@@ -3,7 +3,7 @@ const router = express.Router();
 const huntingController = require('../controllers/huntingController');
 
 // Create a new hunting entry (POST)
-router.post('/hunting/create', huntingController.createHuntingEntry);
+router.post('/create', huntingController.createHuntingEntry);
 
 // Delete a hunting entry by ID (DELETE)
 router.delete('/:id', huntingController.deleteHuntingEntry);
