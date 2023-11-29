@@ -13,14 +13,13 @@
     <% huntingEntries.forEach(function(entry) { %>
       <li>
         <a href="/api/hunting/<%= entry._id %>">
-          <%= entry.locationName %> - <%= entry.date.toDateString() %>
+          <%= entry.locationName %> - <%= entry.date ? entry.date.toDateString() : 'No Entry Available' %>
         </a>
       </li>
     <% }); %>
   </ul>
   <a href="/api/hunting/create" class="btn">Create Entry</a>
 </body>
-<body>
-  <li><a href="/">Home</a></li>
+<body> <li><a href="/">Home</a></li>
 </body>
 </html>

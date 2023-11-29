@@ -55,6 +55,11 @@ async function createHuntingEntry(req, res) {
   }
 }
 
+// Render the create form
+function renderCreateForm(req, res) {
+  res.render('hunting/create');
+}
+
 // Function to update an existing hunting entry
 async function updateHuntingEntry(req, res) {
   try {
