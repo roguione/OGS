@@ -1,56 +1,54 @@
-// server/server.js
-
 // Require and configure dotenv
-require('dotenv').config();
-const methodOverride = require('method-override');
+require("dotenv").config();
 
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const ejs = require('ejs');
+// Import required modules
+const express = require("express");
+const bodyParser = require("body-parser");
+const methodOverride = require("method-override");
+const mongoose = require("mongoose");
+const ejs = require("ejs");
+
+// Create an Express application
 const app = express();
-
 
 // Configure middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(methodOverride("_method"));
 
 // Set EJS as the view engine
-app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views'); 
+app.set("view engine", "ejs");
+app.set("views", __dirname + "/views");
 
 // Set up static file serving
-app.use('/public', express.static(__dirname + '/public'));
-app.use(methodOverride('_method'))
+app.use("/public", express.static(__dirname + "/public"));
 
 // Access the MongoDB URL from the environment variable
 const mongoUrl = process.env.DATABASE_URL;
 
 // Connect to the database
-mongoose.connect(
-  mongoUrl,
-  {
-    useNewUrlParser: true, 
-    useUnifiedTopology: true, 
-  }
-);
+mongoose.connect(mongoUrl, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
+// CSP config that magically worked.
 app.use((req, res, next) => {
   res.setHeader(
-    'Content-Security-Policy',
+    "Content-Security-Policy",
     "default-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' data:; font-src 'self' data:;"
   );
   next();
 });
 
 // Define a route for the root URL
-app.get('/', (req, res) => {
-  res.render('index');
+app.get("/", (req, res) => {
+  res.render("index");
 });
 
-// Set up routes (implement these in server/routes)
-const huntingRoutes = require('./routes/hunting');
-app.use('/api/hunting', huntingRoutes);
+// Set up routes 
+const huntingRoutes = require("./routes/hunting");
+app.use("/api/hunting", huntingRoutes);
 
 // Start the server
 const port = process.env.PORT || 3000;
