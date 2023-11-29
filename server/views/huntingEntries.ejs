@@ -5,6 +5,12 @@
 <head>
   <title>Hunting Entries</title>
   <link rel="stylesheet" href="/public/css/style.css">
+  <style>
+    /* Remove the dot from the "Home" link */
+    ul li:first-child {
+      list-style: none;
+    }
+  </style>
 </head>
 <body>
   <h1>Hunting Entries</h1>
@@ -19,7 +25,8 @@
     <% }); %>
   </ul>
   <a href="/api/hunting/create" class="btn">Create Entry</a>
-</body>
-<body> <li><a href="/">Home</a></li>
+  <ul>
+    <li><a href="/">Home</a></li>
+  </ul>
 </body>
 </html>
