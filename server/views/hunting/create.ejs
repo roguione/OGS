@@ -7,7 +7,10 @@
 </head>
 <body>
   <h1>Create a New Hunting Entry</h1>
-  <form action="/api/hunting/create" method="POST" enctype="multipart/form-data">
+  <form 
+  action="/api/hunting/create" 
+  method="POST"
+  >
     <label for="locationName">Location Name:</label>
     <input type="text" id="locationName" name="locationName" required>
     <br>
@@ -23,8 +26,8 @@
     <label for="longitude">Longitude:</label>
     <input type="number" id="longitude" name="longitude" step="0.000001">
     <br>
-    <label for="photos">Photos:</label>
-    <input type="file" id="photos" name="photos" multiple>
+ <!--    <label for="photos">Photos:</label>
+    <input type="file" id="photos" name="photos" multiple> -->
     <br>
     <button type="submit">Create Entry</button>
   </form>

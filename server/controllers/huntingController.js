@@ -34,23 +34,24 @@ async function getHuntingEntry(req, res) {
   }
 }
 
-// Function to create a new hunting entry or render the create form
+// Function to render the create form
+function renderCreateForm(req, res) {
+  // Render the create form when the request method is GET
+  res.render('hunting/create');
+}
+
+// Function to create a new hunting entry
 async function createHuntingEntry(req, res) {
-  if (req.method === 'GET') {
-    // Render the create form when the request method is GET
-    res.render('hunting/create');
-  } else if (req.method === 'POST') {
-    // Create a new hunting entry when the request method is POST
-    try {
-      await Hunting.create(req.body);
-      res.redirect('/status'); // Redirect to a success page or route
-    } catch (error) {
-      console.error('Error creating hunting entry:', error);
-      res.status(500).render('status/error', {
-        errorCode: 500, 
-        errorMessage: 'Internal Server Error', 
-      });
-    }
+  // Create a new hunting entry when the request method is POST
+  try {
+    await Hunting.create(req.body);
+    res.redirect('/status'); // Redirect to a success page or route
+  } catch (error) {
+    console.error('Error creating hunting entry:', error);
+    res.status(500).render('status/error', {
+      errorCode: 500, 
+      errorMessage: 'Internal Server Error', 
+    });
   }
 }
 
@@ -108,6 +109,7 @@ async function deleteHuntingEntry(req, res) {
 module.exports = {
   getAllHuntingEntries,
   getHuntingEntry,
+  renderCreateForm,
   createHuntingEntry,
   updateHuntingEntry,
   editHuntingEntry,

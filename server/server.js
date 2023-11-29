@@ -1,3 +1,4 @@
+// ogs/server.js
 // Require and configure dotenv
 require("dotenv").config();
 
