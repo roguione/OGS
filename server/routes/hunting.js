@@ -2,6 +2,11 @@ const express = require('express');
 const router = express.Router();
 const huntingController = require('../controllers/huntingController');
 
+// Define a route handler for /status/updateSuccess
+router.get('/updateSuccess', (req, res) => {
+  res.render('status/updateSuccess'); // Render the "updateSuccess" template
+});
+
 // Create a new hunting entry form (GET)
 router.get('/create', huntingController.renderCreateForm);
 

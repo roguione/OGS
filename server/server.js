@@ -51,6 +51,11 @@ app.get("/", (req, res) => {
 const huntingRoutes = require("./routes/hunting");
 app.use("/api/hunting", huntingRoutes);
 
+// Define a route for /status/updateSuccess
+app.get('/status/updateSuccess', (req, res) => {
+  res.render('status/updateSuccess');
+});
+
 // Start the server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

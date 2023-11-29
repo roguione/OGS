@@ -45,7 +45,7 @@ async function createHuntingEntry(req, res) {
   // Create a new hunting entry when the request method is POST
   try {
     await Hunting.create(req.body);
-    res.redirect('/status'); // Redirect to a success page or route
+    res.redirect('/status/updateSuccess');
   } catch (error) {
     console.error('Error creating hunting entry:', error);
     res.status(500).render('status/error', {
