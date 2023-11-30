@@ -1,6 +1,33 @@
-// Import required models
+// Import required models and packages
+const multer = require('multer');
 const Hunting = require('../models/Hunting');
-const Photo = require('../models/photo.js');
+const cloudinary = require('cloudinary').v2; // Require the 'cloudinary' package
+const streamifier = require('streamifier'); // Require the 'streamifier' package
+
+// Function to upload a photo to Cloudinary
+async function uploadPhoto(req, res, next) {
+  try {
+    let result = await streamUpload(req);
+    // Additional database updates could occur after the content is uploaded.
+    res.redirect(`/api/hunting/${req.params.id}`);
+  } catch (err) {
+    next(err);
+  }
+}
+
+function streamUpload(req) {
+  return new Promise((resolve, reject) => {
+    let stream = cloudinary.uploader.upload_stream((error, result) => {
+      if (result) {
+        console.log(result);
+        resolve(result);
+      } else {
+        reject(error);
+      }
+    });
+    streamifier.createReadStream(req.file.buffer).pipe(stream);
+  });
+}
 
 // Function to get all hunting entries
 async function getAllHuntingEntries(req, res) {
@@ -36,9 +63,20 @@ async function getHuntingEntry(req, res) {
 
 // Function to render the create form
 function renderCreateForm(req, res) {
-  // Render the create form when the request method is GET
   res.render('hunting/create');
 }
+
+// Configure Multer to use the "uploads" directory for file storage
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
 
 // Function to create a new hunting entry
 async function createHuntingEntry(req, res) {
@@ -114,4 +152,5 @@ module.exports = {
   updateHuntingEntry,
   editHuntingEntry,
   deleteHuntingEntry,
+  uploadPhoto, // Export the uploadPhoto function
 };

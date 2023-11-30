@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer'); 
+const upload = multer({ dest: 'public/css/images/' });
 const huntingController = require('../controllers/huntingController');
 
 // Define a route handler for /status/updateSuccess
@@ -22,10 +24,23 @@ router.get('/:id/edit', huntingController.editHuntingEntry);
 // Update a hunting entry by ID (Update Entry, PUT)
 router.put('/:id', huntingController.updateHuntingEntry);
 
+// Photo upload route (POST) - Place it here
+router.post(
+  "/:id/photos/single-file",
+  upload.single("imageUpload"),
+  huntingController.uploadPhoto 
+);
+
 // Get a specific hunting entry by ID (GET)
 router.get('/:id', huntingController.getHuntingEntry);
 
 // Get all hunting entries (View Entries, GET)
 router.get('/', huntingController.getAllHuntingEntries);
+
+router.post(
+  "/:id/photos/single-file",
+  upload.single("imageUpload"),
+	huntingController.uploadPhoto
+);
 
 module.exports = router;
