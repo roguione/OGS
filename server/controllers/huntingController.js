@@ -61,7 +61,7 @@ async function getHuntingEntry(req, res) {
   }
 }
 
-// Function to render the create form
+// Function to render the create form <------2days
 function renderCreateForm(req, res) {
   res.render('hunting/create');
 }
